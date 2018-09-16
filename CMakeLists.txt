@@ -1,0 +1,20 @@
+project( BehaviorTree )
+
+file( GLOB_RECURSE BT_LIB_HDRS ${CMAKE_CURRENT_LIST_DIR}/include/*.h ${CMAKE_CURRENT_LIST_DIR}/include/BehaviorTree/*.h )
+file( GLOB BT_LIB_SRCS "${CMAKE_CURRENT_LIST_DIR}/source/*.cpp" )
+add_library( BehaviorTree ${BT_LIB_HDRS} ${BT_LIB_SRCS} )
+include_directories( ${CMAKE_CURRENT_LIST_DIR}/include )
+
+foreach(FILE ${BT_LIB_HDRS})
+  get_filename_component(FN "${FILE}" NAME)
+  string(REPLACE "/" "\\" GROUP "${FN}")
+  if ("${FN}" MATCHES "BT.*\\.h")
+    set(GROUP "Header Files\\BehaviorTree")
+  else()
+    set(GROUP "Header Files")
+  endif()
+  source_group("${GROUP}" FILES "${FILE}")
+endforeach()
+
+set( LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_LIST_DIR}/lib )
+set_property(TARGET BehaviorTree PROPERTY CXX_STANDARD 14)
