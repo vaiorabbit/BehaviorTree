@@ -10,8 +10,10 @@ int main(int argc, char**argv)
     bt_root->AddChild((factory.Create("BTSuccessNode")));
     bt_root->AddChild((factory.Create("BTSuccessNode")));
 
+    bt_root->Reset();
+
     BTContext ctx;
     bt_root->Execute(&ctx);
-    
+
     return 0;
 }
