@@ -14,8 +14,6 @@ typedef std::int32_t BTInt32;
 typedef std::string  BTStr;
 typedef float BTFloat32;
 
-typedef std::vector<BTNode*> BTNodeList;
-
 typedef BTInt32 BTNodeID;
 typedef BTStr   BTNodeName;
 
@@ -26,3 +24,6 @@ enum BTStatus : BTInt8
     Running = 2,
     Unknown = 3
 };
+
+typedef std::vector<BTNode*> BTNodeList;
+typedef BTStatus (*BTCallbackFunction)(BTContext* ctx);

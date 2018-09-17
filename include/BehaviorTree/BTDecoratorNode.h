@@ -15,10 +15,72 @@ private:
 };
 
 
+class BTForceSuccessNode : public BTDecoratorNode
+{
+public:
+    virtual BTStatus Execute(BTContext* ctx) {
+        m_children[0]->Execute(ctx);
+        return BTStatus::Success;
+    }
+};
+
+class BTForceFailureNode : public BTDecoratorNode
+{
+public:
+    virtual BTStatus Execute(BTContext* ctx) {
+        m_children[0]->Execute(ctx);
+        return BTStatus::Failure;
+    }
+};
+
+class BTForceRunningNode : public BTDecoratorNode
+{
+public:
+    virtual BTStatus Execute(BTContext* ctx) {
+        m_children[0]->Execute(ctx);
+        return BTStatus::Running;
+    }
+};
+
 class BTNegateNode : public BTDecoratorNode
 {
 public:
 
     BTNegateNode();
     virtual BTStatus Execute(BTContext* ctx) override;
+};
+
+class BTRepeatNode : public BTDecoratorNode
+{
+public:
+
+    BTRepeatNode();
+    virtual BTStatus Execute(BTContext* ctx) override {
+        BTStatus s = m_children[0]->Execute(ctx);
+        if (s == BTStatus::Failure) {
+            return s;
+        } else if (++m_now == m_limit) {
+            return s;
+        }
+
+        return BTStatus::Running;
+    }
+
+    virtual void OnInit() override {
+        BTDecoratorNode::OnInit();
+        m_now = 0;
+    }
+
+    void SetLimit(BTInt32 limit) {
+        m_limit = limit;
+    }
+
+    BTInt32 GetLimit() {
+        return m_limit;
+    }
+
+protected:
+
+    BTInt32 m_limit;
+    BTInt32 m_now;
 };

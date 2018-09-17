@@ -3,7 +3,9 @@
 # BehaviorTree : Simple Behavior Tree Example #
 
 *   Created       : 2018-09-16
-*   Last modified : 2018-09-16
+*   Last modified : 2018-09-17
+
+[NOTE] Experimental project.
 
 ## How to use ##
 

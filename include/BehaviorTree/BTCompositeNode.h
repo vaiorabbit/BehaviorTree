@@ -11,6 +11,8 @@ public:
     BTCompositeNode(BTInt32 childrenCount);
     virtual ~BTCompositeNode();
 
+    virtual void Reset() override;
+
     BTNodeList GetChildren();
     size_t     GetChildrenCount();
 
@@ -37,7 +39,6 @@ public:
     virtual BTStatus Execute(BTContext* ctx) override;
 };
 
-
 class BTSelectorNode : public BTCompositeNode
 {
 public:
@@ -45,4 +46,20 @@ public:
     BTSelectorNode();
     BTSelectorNode(BTInt32 childrenCount);
     virtual BTStatus Execute(BTContext* ctx) override;
+};
+
+class BTIfElseNode : public BTCompositeNode
+{
+public:
+
+    BTIfElseNode();
+    virtual BTStatus Execute(BTContext* ctx) override;
+
+    void SetConditionNode(BTNode* node);
+    void SetIfNode(BTNode* node);
+    void SetElseNode(BTNode* node);
+
+private:
+    BTIfElseNode(BTInt32 childrenCount) = delete;
+
 };

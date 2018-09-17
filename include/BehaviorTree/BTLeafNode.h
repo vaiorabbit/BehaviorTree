@@ -35,3 +35,23 @@ public:
         return BTStatus::Running;
     }
 };
+
+class BTCallNode : public BTLeafNode
+{
+public:
+    virtual BTStatus Execute(BTContext* ctx) {
+        return m_fn ? m_fn(ctx) : BTStatus::Unknown;
+    }
+
+    void SetCallbackFunction(BTCallbackFunction fn) {
+        m_fn = fn;
+    }
+
+    BTCallbackFunction GetCallbackFunction() {
+        return m_fn;
+    }
+
+protected:
+
+    BTCallbackFunction m_fn;
+};

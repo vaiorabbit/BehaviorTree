@@ -17,6 +17,20 @@ BTCompositeNode::BTCompositeNode(BTInt32 childrenCount)
 BTCompositeNode::~BTCompositeNode()
 {}
 
+void BTCompositeNode::Reset()
+{
+    BTNode::Reset();
+
+    for (auto child : m_children) {
+        if (child) {
+            child->Reset();
+        }
+    }
+
+    m_currentChildIndex = 0;
+    m_initialized       = false;
+}
+
 BTNodeList BTCompositeNode::GetChildren()
 {
     return m_children;
@@ -115,4 +129,47 @@ BTStatus BTSelectorNode::Execute(BTContext* ctx)
             }
         }
     }
+}
+
+
+BTIfElseNode::BTIfElseNode()
+    : BTCompositeNode(3)
+{}
+
+BTStatus BTIfElseNode::Execute(BTContext* ctx)
+{
+    if (m_currentChildIndex == 0) {
+        BTStatus s = m_children[0]->Execute(ctx);
+        if (s == BTStatus::Success) {
+            m_currentChildIndex = 1;
+        } else if (s == BTStatus::Failure) {
+            m_currentChildIndex = 2;
+        }
+    }
+
+    if (m_currentChildIndex != 0) {
+        BTNode* node = m_children[m_currentChildIndex];
+        if (node) {
+            return m_children[m_currentChildIndex]->Execute(ctx);
+        } else {
+             return BTStatus::Failure;
+        }
+    }
+
+    return BTStatus::Running;
+}
+
+void BTIfElseNode::SetConditionNode(BTNode* node)
+{
+    SetChild(node, 0);
+}
+
+void BTIfElseNode::SetIfNode(BTNode* node)
+{
+    SetChild(node, 1);
+}
+
+void BTIfElseNode::SetElseNode(BTNode* node)
+{
+    SetChild(node, 2);
 }

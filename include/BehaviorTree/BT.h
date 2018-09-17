@@ -15,4 +15,5 @@ public:
 protected:
 
     BTCompositeNode* m_rootNode;
+    BTContext        m_context;
 };

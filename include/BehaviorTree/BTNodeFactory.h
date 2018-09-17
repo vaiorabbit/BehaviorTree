@@ -19,8 +19,12 @@ public:
     void RegisterStandardNodeTypes() {
         RegisterType<BTSequenceNode>("BTSequenceNode");
         RegisterType<BTSelectorNode>("BTSelectorNode");
+        RegisterType<BTSelectorNode>("BTIfElseNode");
 
-        RegisterType<BTSelectorNode>("BTNegateNode");
+        RegisterType<BTForceSuccessNode>("BTForceSuccessNode");
+        RegisterType<BTForceFailureNode>("BTForceFailureNode");
+        RegisterType<BTForceFailureNode>("BTForceRunningNode");
+        RegisterType<BTNegateNode>("BTNegateNode");
 
         RegisterType<BTSuccessNode>("BTSuccessNode");
         RegisterType<BTFailureNode>("BTFailureNode");

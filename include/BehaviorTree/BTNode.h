@@ -10,14 +10,15 @@ public:
     virtual ~BTNode();
 
     const BTNodeName& GetNodeName();
-    void SetNodeName(const BTNodeName& nodeName);
+    void              SetNodeName(const BTNodeName& nodeName);
 
     BTNodeID GetID();
-    void SetID(BTNodeID id);
+    void     SetID(BTNodeID id);
 
     BTCompositeNode* GetParent();
-    void SetParent(BTCompositeNode* parentNode);
+    void             SetParent(BTCompositeNode* parentNode);
 
+    virtual void Reset() {}
     virtual void OnInit() {}
     virtual void OnTerm() {}
     virtual BTStatus Execute(BTContext* ctx) = 0;
