@@ -30,95 +30,16 @@ public:
         : m_entries()
         {}
 
-    bool GetInt32(BTStr key, BTInt32& val)
-    {
-        if (m_entries.find(key) != m_entries.end())
-        {
-            val = m_entries[key].value.valInt32;
-            return true;
-        }
-        return false;
-    }
+    bool GetInt32(BTStr key, BTInt32& val);
+    bool GetFloat32(BTStr key, BTFloat32& val);
+    bool GetBool(BTStr key, bool& val);
 
-    bool GetFloat32(BTStr key, BTFloat32& val)
-    {
-        if (m_entries.find(key) != m_entries.end())
-        {
-            val = m_entries[key].value.valFloat32;
-            return true;
-        }
-        return false;
-    }
+    bool SetInt32(BTStr key, BTInt32 val);
+    bool SetFloat32(BTStr key, BTFloat32 val);
+    bool SetBool(BTStr key, bool val);
 
-    bool GetBool(BTStr key, bool& val)
-    {
-        if (m_entries.find(key) != m_entries.end())
-        {
-            val = m_entries[key].value.valBool;
-            return true;
-        }
-        return false;
-    }
-
-    bool SetInt32(BTStr key, BTInt32 val)
-    {
-        if (m_entries.find(key) != m_entries.end())
-        {
-            m_entries[key].value.valInt32 = val;
-            return true;
-        }
-        return false;
-    }
-
-    bool SetFloat32(BTStr key, BTFloat32 val)
-    {
-        if (m_entries.find(key) != m_entries.end())
-        {
-            m_entries[key].value.valFloat32 = val;
-            return true;
-        }
-        return false;
-    }
-
-    bool SetBool(BTStr key, bool val)
-    {
-        if (m_entries.find(key) != m_entries.end())
-        {
-            m_entries[key].value.valBool = val;
-            return true;
-        }
-        return false;
-    }
-
-    bool AddInt32(BTStr key, BTInt32 val)
-    {
-        if (m_entries.find(key) == m_entries.end())
-        {
-            m_entries[key].value.valInt32 = val;
-            return true;
-        }
-        return false;
-    }
-
-    bool AddFloat32(BTStr key, BTFloat32 val)
-    {
-        if (m_entries.find(key) == m_entries.end())
-        {
-            m_entries[key].value.valFloat32 = val;
-            return true;
-        }
-        return false;
-    }
-
-    bool AddBool(BTStr key, bool val)
-    {
-        if (m_entries.find(key) == m_entries.end())
-        {
-            m_entries[key].value.valBool = val;
-            return true;
-        }
-        return false;
-    }
+    bool AddInt32(BTStr key, BTInt32 val);
+    bool AddFloat32(BTStr key, BTFloat32 val);
 
 private:
 

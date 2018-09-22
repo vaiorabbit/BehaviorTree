@@ -11,6 +11,9 @@ public:
     BTCompositeNode(BTInt32 childrenCount);
     virtual ~BTCompositeNode();
 
+    bool Initialized() {
+        return m_initialized;
+    }
     virtual void Reset() override;
 
     BTNodeList GetChildren();

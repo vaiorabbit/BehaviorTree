@@ -7,8 +7,10 @@ class BTLeafNode : public BTNode
 {
 public:
 
-    BTLeafNode();
-    virtual ~BTLeafNode();
+    BTLeafNode()
+        {}
+    virtual ~BTLeafNode()
+        {}
 };
 
 
@@ -39,17 +41,14 @@ public:
 class BTCallNode : public BTLeafNode
 {
 public:
-    virtual BTStatus Execute(BTContext* ctx) {
-        return m_fn ? m_fn(ctx) : BTStatus::Unknown;
-    }
+    BTCallNode()
+        : BTLeafNode()
+        , m_fn(nullptr)
+        {}
 
-    void SetCallbackFunction(BTCallbackFunction fn) {
-        m_fn = fn;
-    }
-
-    BTCallbackFunction GetCallbackFunction() {
-        return m_fn;
-    }
+    virtual BTStatus Execute(BTContext* ctx);
+    void SetCallbackFunction(BTCallbackFunction fn);
+    BTCallbackFunction GetCallbackFunction();
 
 protected:
 

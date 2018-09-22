@@ -12,6 +12,10 @@ public:
     void SetRootNode(BTCompositeNode* root);
     BTCompositeNode* GetRootNode(BTCompositeNode* root);
 
+    BTContext& GetContext();
+
+    BTStatus Run();
+
 protected:
 
     BTCompositeNode* m_rootNode;

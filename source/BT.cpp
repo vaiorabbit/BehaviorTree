@@ -24,3 +24,20 @@ BTCompositeNode* BehaviorTree::GetRootNode(BTCompositeNode* root)
 {
     return m_rootNode;
 }
+
+BTContext& BehaviorTree::GetContext()
+{
+    return m_context;
+}
+
+BTStatus BehaviorTree::Run()
+{
+    m_rootNode->Reset();
+
+    BTStatus status;
+    do {
+        status = m_rootNode->Execute(&m_context);
+    } while (status == BTStatus::Running);
+
+    return status;
+}

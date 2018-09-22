@@ -45,26 +45,21 @@ public:
 class BTNegateNode : public BTDecoratorNode
 {
 public:
+    BTNegateNode()
+        : BTDecoratorNode()
+    {}
 
-    BTNegateNode();
     virtual BTStatus Execute(BTContext* ctx) override;
 };
 
 class BTRepeatNode : public BTDecoratorNode
 {
 public:
+    BTRepeatNode()
+        : BTDecoratorNode()
+    {}
 
-    BTRepeatNode();
-    virtual BTStatus Execute(BTContext* ctx) override {
-        BTStatus s = m_children[0]->Execute(ctx);
-        if (s == BTStatus::Failure) {
-            return s;
-        } else if (++m_now == m_limit) {
-            return s;
-        }
-
-        return BTStatus::Running;
-    }
+    virtual BTStatus Execute(BTContext* ctx) override;
 
     virtual void OnInit() override {
         BTDecoratorNode::OnInit();

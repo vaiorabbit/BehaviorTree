@@ -138,6 +138,11 @@ BTIfElseNode::BTIfElseNode()
 
 BTStatus BTIfElseNode::Execute(BTContext* ctx)
 {
+    if (!m_initialized) {
+        OnInit();
+        m_initialized = true;
+    }
+    
     if (m_currentChildIndex == 0) {
         BTStatus s = m_children[0]->Execute(ctx);
         if (s == BTStatus::Success) {

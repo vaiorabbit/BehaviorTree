@@ -2,8 +2,17 @@
 #include "BehaviorTree/BTLeafNode.h"
 #include "BehaviorTree/BTBlackboard.h"
 
-BTLeafNode::BTLeafNode()
-{}
+BTStatus BTCallNode::Execute(BTContext* ctx)
+{
+    return m_fn ? m_fn(ctx) : BTStatus::Unknown;
+}
 
-BTLeafNode::~BTLeafNode()
-{}
+void BTCallNode::SetCallbackFunction(BTCallbackFunction fn)
+{
+    m_fn = fn;
+}
+
+BTCallbackFunction BTCallNode::GetCallbackFunction()
+{
+    return m_fn;
+}
